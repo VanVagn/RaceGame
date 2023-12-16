@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class Player {
+public class Gamer {
 
     public static final int MAX_V = 50;
     public static final int MAX_TOP_COORDINATE = 40;
