@@ -1,7 +1,6 @@
 package github.com.classes.frame;
 
 import github.com.classes.persistence.PlayerPersistence;
-import github.com.classes.music.MP;
 import github.com.classes.raceClasses.Road;
 import javax.swing.*;
 
@@ -43,7 +42,6 @@ public class GameFrame extends JFrame implements ActionListener{
             gameEndMenu.init();
             timer.stop();
             frame.dispose();
-            MP.clip.stop();
             gameTime = road.getTimeCount().getResultTime();
             workWithBd(gameTime);
 

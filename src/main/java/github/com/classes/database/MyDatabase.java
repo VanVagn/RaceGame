@@ -96,7 +96,6 @@ public class MyDatabase {
             System.out.println(e.getMessage());
         }
     }
-
     public Connection connect() throws SQLException {
         return DriverManager.getConnection(
                 properties.getUrl(),
@@ -104,6 +103,8 @@ public class MyDatabase {
                 properties.getPassword()
         );
     }
+
+
 
 
 

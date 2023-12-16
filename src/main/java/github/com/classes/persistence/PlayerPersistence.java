@@ -11,7 +11,7 @@ public class PlayerPersistence {
     private MyDatabase myDatabase = MyDatabase.getInstance();
     public void deleteAllTimes(String table) {
         String sql = """
-                delete
+                delete 
                 from Race.%s
                 """;
         myDatabase.execute(String.format(sql, table));

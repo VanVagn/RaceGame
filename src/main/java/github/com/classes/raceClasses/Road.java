@@ -1,14 +1,10 @@
 package github.com.classes.raceClasses;
 
 import github.com.classes.adapter.MyKeyAdapter;
-import github.com.classes.music.MP;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
@@ -31,15 +27,6 @@ public class Road extends JPanel implements ActionListener, Runnable{
         enemiesFactory.start();
         addKeyListener(new MyKeyAdapter(player));
         setFocusable(true);
-        try {
-            MP.play();
-        } catch (UnsupportedAudioFileException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (LineUnavailableException e) {
-            throw new RuntimeException(e);
-        }
 
     }
 
@@ -168,4 +155,6 @@ public class Road extends JPanel implements ActionListener, Runnable{
     public TimeCount getTimeCount() {
         return timeCount;
     }
+
+
 }
