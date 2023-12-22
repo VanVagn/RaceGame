@@ -1,35 +1,29 @@
 package github.com.classes.raceClasses;
-
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
+import static github.com.classes.constants.Consts.*;
+
 public class Player {
-
-    public static final int MAX_V = 50;
-    public static final int MAX_TOP_COORDINATE = 40;
-    public static final int MAX_BOTTOM_COORDINATE = 410;
     Image image = new ImageIcon("src/main/resources/images/Audi.png").getImage();
-
-    private int v = 5;
+    private int v = MIN_SPEED;
     private int dv = 0;
     private int dy = 0;
     private int step = 1;
     private int stepSide = 8;
-
     private int x = 0;
     private int y = 40;
     private int firstLayer = 0;
-    private int secondLayer = 1100;
+    private int secondLayer = SECOND_LAYER_START;
 
     public void move() {
 
         v += dv;
         y -= dy;
 
-        if (v <= 5) {
-            v = 5;
+        if (v <= MIN_SPEED) {
+            v = MIN_SPEED;
         }
         if (v >= MAX_V) {
             v = MAX_V;
@@ -42,7 +36,7 @@ public class Player {
         }
         if (secondLayer - v <= 0) {
             firstLayer = 0;
-            secondLayer = 1100;
+            secondLayer = SECOND_LAYER_START;
         } else {
             firstLayer -= v;
             secondLayer -= v;
@@ -51,7 +45,7 @@ public class Player {
     }
 
     public Rectangle getRect() {
-        return new Rectangle(x, y, 195, 80);
+        return new Rectangle(x, y, RECT_WIDTH, RECT_HEIGHT);
     }
 
     public void keyPressed(KeyEvent e) {
@@ -69,6 +63,7 @@ public class Player {
             dy = -stepSide;
         }
     }
+
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
         if ((key == KeyEvent.VK_RIGHT) || (key == KeyEvent.VK_LEFT)) {
@@ -78,8 +73,9 @@ public class Player {
             dy = 0;
         }
     }
+
     public int getRealSpeed() {
-        return 5 * v;
+        return KOEF_SPEED * v;
     }
 
     public int getV() {
@@ -101,5 +97,4 @@ public class Player {
     public int getSecondLayer() {
         return secondLayer;
     }
-
 }

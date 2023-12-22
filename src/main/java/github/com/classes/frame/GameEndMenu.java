@@ -1,19 +1,17 @@
 package github.com.classes.frame;
 
 import github.com.classes.persistence.PlayerPersistence;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import static github.com.classes.constants.Consts.*;
+
 
 public class GameEndMenu extends JFrame implements ActionListener{
-
-
-    private final ImageIcon imageIc = new ImageIcon("src/main/resources/images/drive.png");
     private final ImageIcon imageIcon = new ImageIcon("src/main/resources/images/lose.png");
-    private  final JButton button = new JButton("Вернуться в начальное меню");
-    private  final JButton secButton = new JButton("Начать новую игру");
+    private JButton button;
+    private JButton secButton;
     private PlayerPersistence playerPersistence;
 
     public GameEndMenu(PlayerPersistence playerPersistence) {
@@ -21,27 +19,30 @@ public class GameEndMenu extends JFrame implements ActionListener{
     }
 
     public void init() {
-        setSize(1280,820);
-        setLocation(30,30);
-//      JLabel label = new JLabel(image);
-        JLabel labelTwo = new JLabel(imageIcon);
+        setSize(GAME_END_WIDTH, GAME_END_HEIGHT);
+        setLocation(GAME_END_X, GAME_END_Y);
 
+        JLabel label = new JLabel(imageIcon);
         JPanel panel = new JPanel();
-//        panel.add(label);
-        panel.add(labelTwo);
-        panel.add(button, BorderLayout.SOUTH);
-        panel.add(secButton, BorderLayout.SOUTH);
-        add(panel);
-        setVisible(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        button = new JButton("Вернуться в начальное меню");
+        secButton = new JButton("Начать новую игру");
 
         button.addActionListener(this);
         secButton.addActionListener(this);
+
+        panel.add(label);
+        panel.add(button, BorderLayout.SOUTH);
+        panel.add(secButton, BorderLayout.SOUTH);
+
+        add(panel);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == button) {
-            RacingGameMenu racingGameMenu = new RacingGameMenu();
+            StartGameMenu racingGameMenu = new StartGameMenu();
             racingGameMenu.init();
         } else if (e.getSource() == secButton) {
             GameFrame gameFrame = new GameFrame(playerPersistence);

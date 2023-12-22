@@ -1,11 +1,8 @@
 package github.com;
-
-
-import github.com.classes.frame.GameEndMenu;
-import github.com.classes.frame.RacingGameMenu;
+import github.com.classes.frame.StartGameMenu;
 
 public class Main {
-    private static final RacingGameMenu menu = new RacingGameMenu();
+    private static final StartGameMenu menu = new StartGameMenu();
 
     public static void main(String[] args) {
         menu.init();

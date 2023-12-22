@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Road extends JPanel implements ActionListener, Runnable{
+import static github.com.classes.constants.Consts.*;
 
-    public static final int TWO_WIDTH_OF_FRAME = 2200;
+public class Road extends JPanel implements ActionListener, Runnable {
 
     private Timer mainTimer = new Timer(10, this);
     private Image image = new ImageIcon("src/main/resources/images/road.png").getImage().getScaledInstance(1100,700,Image.SCALE_DEFAULT);
@@ -62,20 +62,16 @@ public class Road extends JPanel implements ActionListener, Runnable{
         g.drawString("Время: " + Math.round(timeCount.getResultTime()) + "c", 300, 18);
 
         Iterator<Enemy> i = enemies.iterator();
-        List<Enemy> deleteEnemies = new ArrayList<>();
 
-        for (Enemy enemy : enemies) {
+        while (i.hasNext()) {
+            Enemy enemy = i.next();
             if ((enemy.getX() >= TWO_WIDTH_OF_FRAME) || (enemy.getX() <= -TWO_WIDTH_OF_FRAME)) {
-                deleteEnemies.add(enemy);
+                i.remove();
             } else {
                 g.drawImage(enemy.getImage(), enemy.getX(), enemy.getY(), null);
             }
         }
 
-        for (Enemy enemy : deleteEnemies) {
-            enemies.remove(enemy);
-        }
-        deleteEnemies.clear();
     }
 
     @Override
@@ -85,6 +81,7 @@ public class Road extends JPanel implements ActionListener, Runnable{
         Iterator<Enemy> i = enemies.iterator();
         while (i.hasNext()) {
             Enemy enemy = i.next();
+
             enemy.move();
         }
         repaint();
@@ -106,16 +103,29 @@ public class Road extends JPanel implements ActionListener, Runnable{
     private void testCollisionEnemyWithEnemies() {
         int curSpeed;
         int anotherSpeed;
-        int minSpeed;
-        for (Enemy curEnemy : enemies) {
-            for (Enemy anotherEnemy : enemies) {
+        Enemy curEnemy;
+        Enemy anotherEnemy;
+        int speed = MIN_SPEED;
+        int strategy;
+        Random random = new Random();
+        
+        for (int i = 0; i < enemies.size(); i++) {
+            for (int j = 0; j < enemies.size(); j++) {
+                curEnemy = enemies.get(i);
+                anotherEnemy = enemies.get(j);
                 if (!curEnemy.equals(anotherEnemy)) {
                     curSpeed = curEnemy.getV();
                     anotherSpeed = anotherEnemy.getV();
-                    minSpeed = Math.min(curSpeed, anotherSpeed);
                     if (curEnemy.getRectForTest().intersects(anotherEnemy.getRectForTest())) {
-                        curEnemy.setSpeed(minSpeed);
-                        anotherEnemy.setSpeed(minSpeed);
+                        strategy = random.nextInt(0,1);
+                        switch (strategy) {
+                            case (0):
+                                speed = Math.min(curSpeed, anotherSpeed);
+                            case (1):
+                                speed = Math.max(curSpeed, anotherSpeed);
+                        }
+                        curEnemy.setSpeed(speed);
+                        anotherEnemy.setSpeed(speed);
                     }
                 }
             }
@@ -124,7 +134,7 @@ public class Road extends JPanel implements ActionListener, Runnable{
 
     private Enemy creatEnemy() {
         Random rand = new Random();
-        Enemy enemy = new Enemy(1100, rand.nextInt(40, 410), rand.nextInt(5,40), this);
+        Enemy enemy = new Enemy(ENEMY_START_X, rand.nextInt(ENEMY_MIN_Y, ENEMY_MAX_Y), rand.nextInt(ENEMY_MIN_V,ENEMY_MAX_V), this);
         Iterator<Enemy> i = enemies.iterator();
         boolean flag;
         while (true) {
@@ -132,7 +142,7 @@ public class Road extends JPanel implements ActionListener, Runnable{
             while (i.hasNext()) {
                 Enemy curEnemy = i.next();
                 if (enemy.getRectForTest().intersects(curEnemy.getRectForTest())) {
-                    enemy = new Enemy(1100, rand.nextInt(40, 410), rand.nextInt(5, 40), this);
+                    enemy =  new Enemy(ENEMY_START_X, rand.nextInt(ENEMY_MIN_Y, ENEMY_MAX_Y), rand.nextInt(ENEMY_MIN_V,ENEMY_MAX_V), this);
                     flag = false;
                     break;
                 }
