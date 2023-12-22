@@ -1,0 +1,185 @@
+@startuml
+
+class Main {
+    + {static} main(String[]) : void
+    - {static} menu : StartGameMenu
+
+}
+
+class StartGameMenu {
+    + init() : void
+    + actionPerformed() : void
+
+}
+
+class GameFrame {
+    - test() : void
+    - workWithBd() : void
+    + actionPerformed() : void
+    + initGame() : void
+}
+
+class ResultsFrame {
+    + init() : void
+    + actionPerformed() : void
+}
+
+class GameEndMenu {
+    + init() : void
+    + actionPerformed() : void
+}
+
+class Road {
+    - mainTimer : Timer
+    - image : Image
+    - player : Player
+    - enemiesFactory : Thread
+    - enemies : List<Enemy>
+    - timeCount : TimeCount
+    - createEnemy() : Enemy
+    - testCollisionEnemyWithEnemies() : void
+    + run() : void
+    + actionPerformed() : void
+    + paint() : void
+    + testCollisionPlayerWithEnemies() : boolean
+}
+
+class Player {
+    - x : int
+    - y : int
+    - v : int
+    - dx : int
+    - dy : int
+    - step : int
+    - stepSide : int
+    - firstLayer : int
+    - secondLayer : int
+    - image : Image
+    + move() : void
+    + getRect() : Rectangle
+    + keyPressed() : void
+    + keyReleased() : void
+    + getRealSpeed() : int
+    + getV() : int
+    + getX() : int
+    + getY() : int
+    + getFirstLayer() : int
+    + getSecondLayer() : int
+}
+
+class Enemy {
+    - x : int
+    - y : int
+    - v : int
+    - image : Image
+    - road : Road
+    + move() : void
+    + getRect() : Rectangle
+    + getRectForTest() : Rectangle
+    + getV() : int
+    + getX() : int
+    + getY() : int
+    + setSpeed() : void
+}
+
+class TimeCount {
+    - beginTime : long
+    - resultTime : long
+    + startTime() : void
+    + getResultTime() : long
+    + getBeginTime() : long
+}
+
+class PlayerPersistence {
+    + deleteAllTimes() : void
+    + addTime() : void
+    + getAll() : ArrayList<Long>
+    + getById() : long
+    + updateTime() : void
+    + restartId() : void
+    + getMyDatabase() : MyDatabase
+}
+
+class MyDatabase {
+    + {static} getInstance() : MyDatabase
+    + init() : void
+    + createSchema() : void
+    + createTable() : void
+    + selectAll() : List<HashMap<Integer, Long>>
+    + selectById() : HashMap<Integer, Long>
+    + execute() : void
+    + connect() : Connection
+
+}
+
+class DatabaseProperties {
+    + {static} getProperties() : DatabaseProperties
+    + init() : void
+}
+
+class PropertiesFactory {
+    + getUrl() : String
+    + getLogin() : String
+    + getPassword() : String
+}
+
+class MyKeyAdapter {
+    + keyPressed : void
+    + keyReleased : void
+}
+
+class Radio {
+    + start() : void
+    + stop() : void
+    + run() : void
+}
+
+interface Consts {
+
+}
+interface ActionListener {
+
+}
+interface Runnable {
+
+}
+
+Road *-- Player
+Road *-- Enemy
+Road *-- TimeCount
+Road <|.. ActionListener
+Road <|.. Runnable
+
+GameFrame *-- Road
+GameFrame *-- PlayerPersistence
+GameFrame *-- GameEndMenu
+GameFrame <|.. ActionListener
+GameFrame *-- Radio
+
+Main *-- StartGameMenu
+
+MyKeyAdapter *-- Player
+
+StartGameMenu *-- GameFrame
+StartGameMenu *-- ResultsFrame
+StartGameMenu *-- PlayerPersistence
+StartGameMenu <|.. ActionListener
+StartGameMenu <|.. Consts
+
+ResultsFrame *-- PlayerPersistence
+ResultsFrame <|.. ActionListener
+
+GameEndMenu *-- PlayerPersistence
+GameEndMenu <|.. ActionListener
+
+Radio <|.. Runnable
+
+PlayerPersistence *-- MyDatabase
+MyDatabase *-- DatabaseProperties
+DatabaseProperties *--PropertiesFactory
+
+TimeCount <|.. Consts
+Player <|.. Consts
+Road <|.. Consts
+Enemy <|.. Consts
+@enduml

@@ -6,7 +6,7 @@ import javazoom.jl.player.Player;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class Radio implements Runnable{
+public class Radio implements Runnable {
     private FileInputStream input;
     private Player player;
     private Thread thread = new Thread(this);

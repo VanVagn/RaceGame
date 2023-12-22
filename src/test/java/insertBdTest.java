@@ -1,8 +1,6 @@
 import github.com.classes.persistence.PlayerPersistence;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-
 import static org.assertj.core.api.BDDAssertions.then;
 
 public class insertBdTest {
@@ -27,6 +25,4 @@ public class insertBdTest {
         long actual = playerPersistence.getById(testBd,1);
         then(actual == expected);
     }
-
-
 }

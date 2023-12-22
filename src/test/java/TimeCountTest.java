@@ -2,9 +2,9 @@ import github.com.classes.raceClasses.TimeCount;
 import org.junit.jupiter.api.Test;
 import static org.mockito.BDDMockito.then;
 
-
 public class TimeCountTest {
     TimeCount timeCount = new TimeCount();
+
     @Test
     public void checkTime() throws InterruptedException {
         long expected = 1;

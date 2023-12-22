@@ -1,11 +1,11 @@
 import github.com.classes.persistence.PlayerPersistence;
 import org.junit.jupiter.api.Test;
-
 import static org.assertj.core.api.BDDAssertions.then;
 
 public class updateBdTest {
     String nameTable = "update";
     PlayerPersistence playerPersistence = new PlayerPersistence();
+
     private void createTestBd() {
         String sql = """
                 create table if not exists Race.update (

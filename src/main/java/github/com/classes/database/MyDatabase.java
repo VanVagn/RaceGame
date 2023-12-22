@@ -23,7 +23,7 @@ public class MyDatabase {
 
     private void init() {
         createSchema();
-        createtable_gameTime();
+        createTable();
     }
 
 
@@ -35,7 +35,7 @@ public class MyDatabase {
         execute(sql);
     }
 
-    public void  createtable_gameTime() {
+    public void  createTable() {
         String sql = """
                 create table if not exists Race.table_game (
                     id serial primary key,
