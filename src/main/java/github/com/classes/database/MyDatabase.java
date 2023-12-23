@@ -8,7 +8,6 @@ import java.util.*;
 
 public class MyDatabase {
     private static MyDatabase instance;
-
     private DatabaseProperties properties = PropertiesFactory.getProperties();
 
     public MyDatabase() {

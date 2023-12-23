@@ -16,7 +16,7 @@ public class GameFrame extends JFrame implements ActionListener{
     private long gameTime;
     private final PlayerPersistence playerPersistence;
     private GameEndMenu gameEndMenu;
-    Radio radio = new Radio();
+    private Radio radio = new Radio();
 
     public GameFrame(PlayerPersistence playerPersistence) {
         this.playerPersistence = playerPersistence;

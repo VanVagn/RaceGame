@@ -15,7 +15,6 @@ public class ResultsFrame extends JFrame implements ActionListener {
     private JTable jTable;
     private int length;
     private Button back;
-
     private DefaultTableModel model = new DefaultTableModel();
 
     public ResultsFrame(PlayerPersistence playerPersistence) {

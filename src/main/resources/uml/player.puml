@@ -7,12 +7,26 @@ class Main {
 }
 
 class StartGameMenu {
+    - startButton : JButton
+    - exitButton : JButton
+    - baseConnButton : JButton
+    - deleteButton : JButton
+    - playerPersistence : PlayerPersistence
+    - resultsFrame : ResultsFrame
+    - gameFrame : GameFrame
     + init() : void
     + actionPerformed() : void
 
 }
 
 class GameFrame {
+    - frame : JFrame
+    - road : Road
+    - timer : Timer
+    - gameTime : long
+    - playerPersistence : PlayerPersistence
+    - gameEndMenu : GameEndMenu
+    - radio : Radio
     - test() : void
     - workWithBd() : void
     + actionPerformed() : void
@@ -20,11 +34,21 @@ class GameFrame {
 }
 
 class ResultsFrame {
+    - playerPersistence : PlayerPersistence
+    - allCurTimes : ArrayList<Long>
+    - jTable : JTable
+    - length : int
+    - back : Button
+    - model : DefaultTableModel
     + init() : void
     + actionPerformed() : void
 }
 
 class GameEndMenu {
+    - imageIcon : ImageIcon
+r    - button : JButton
+    - secButton : JButton
+    - playerPersistence : PlayerPersistence
     + init() : void
     + actionPerformed() : void
 }
@@ -91,6 +115,7 @@ class TimeCount {
 }
 
 class PlayerPersistence {
+    - myDatabase : MyDatabase
     + deleteAllTimes() : void
     + addTime() : void
     + getAll() : ArrayList<Long>
@@ -101,6 +126,8 @@ class PlayerPersistence {
 }
 
 class MyDatabase {
+    - {static} instance : MyDatabase
+    - properties : DatabaseProperties
     + {static} getInstance() : MyDatabase
     + init() : void
     + createSchema() : void
@@ -118,6 +145,7 @@ class DatabaseProperties {
 }
 
 class PropertiesFactory {
+    - {static} properties : DatabaseProperties
     + getUrl() : String
     + getLogin() : String
     + getPassword() : String
@@ -129,6 +157,9 @@ class MyKeyAdapter {
 }
 
 class Radio {
+    - input : FileInputStream
+    - player : Player
+    - thread : Thread
     + start() : void
     + stop() : void
     + run() : void
@@ -176,7 +207,7 @@ Radio <|.. Runnable
 
 PlayerPersistence *-- MyDatabase
 MyDatabase *-- DatabaseProperties
-DatabaseProperties *--PropertiesFactory
+PropertiesFactory *-- DatabaseProperties
 
 TimeCount <|.. Consts
 Player <|.. Consts
