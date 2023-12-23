@@ -46,7 +46,7 @@ class ResultsFrame {
 
 class GameEndMenu {
     - imageIcon : ImageIcon
-r    - button : JButton
+    - button : JButton
     - secButton : JButton
     - playerPersistence : PlayerPersistence
     + init() : void
